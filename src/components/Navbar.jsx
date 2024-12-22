@@ -20,37 +20,38 @@ const NavButton = ({ title, customFunc, icon, color, dotColor }) => (
     >
       <span
         style={{
-          background: dotColor,right: '9px', top: '10px' }}
+          background: dotColor, right: '9px', top: '10px'
+        }}
         className=" position-absolute d-inline-flex rounded-circle h-2 w-2"
-        />
+      />
 
-        {icon}
-      
+      {icon}
+
     </button>
   </TooltipComponent>
 );
 
 const Navbar = () => {
   const { activeMenu, setActiveMenu, handleClick, isClicked, screenSize, setScreenSize, currentColor, setIsClicked, initialState } = useStateContext();
-  
+
   useEffect(() => {
     const handleResize = () => setScreenSize(window.innerWidth);
     window.addEventListener('resize', handleResize);
     handleResize();
-    
+
     return () => window.removeEventListener('resize', handleResize);
-  }, [])
+  }, [setScreenSize]);
   useEffect(() => {
     if (screenSize <= 900)
       setActiveMenu(false);
     else
       setActiveMenu(true);
-  }, [screenSize])
+  }, [screenSize, setActiveMenu]);
 
   return (
     <div className='md-active d-flex justify-content-between p-2 md:mx-6 md:mr-6  position-relative w-100'>
-      <NavButton title="Menu" customFunc={() => setActiveMenu((prevActiveMenu) => !prevActiveMenu)} dotColor=""  color={currentColor} icon={< AiOutlineMenu />} />
-    
+      <NavButton title="Menu" customFunc={() => setActiveMenu((prevActiveMenu) => !prevActiveMenu)} dotColor="" color={currentColor} icon={< AiOutlineMenu />} />
+
       <div className="d-flex position-relative">
         <NavButton title="Cart" customFunc={() => handleClick('cart')} color={currentColor} icon={<FiShoppingCart />} />
         <NavButton title="Chat" dotColor="#03C9D7" customFunc={() => handleClick('chat')} color={currentColor} icon={<BsChatLeft />} />
@@ -59,7 +60,7 @@ const Navbar = () => {
           <div
             className="d-flex align-items-center gap-2  p-1 rounded-2 background-hover"
             onClick={() => handleClick('userProfile')}
-            style={{cursor:'pointer'}}
+            style={{ cursor: 'pointer' }}
           >
             <img
               className="rounded-circle w-8 h-8"
@@ -75,12 +76,12 @@ const Navbar = () => {
             <MdKeyboardArrowDown className="text-muted text-14" />
           </div>
         </TooltipComponent>
-        
+
         {isClicked.cart && <Cart />}
         {isClicked.chat && <Chat />}
         {isClicked.notification && <Notification />}
         {isClicked.userProfile && <UserProfile />}
-        
+
       </div>
 
     </div>

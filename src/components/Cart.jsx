@@ -27,7 +27,7 @@ const Cart = () => {
             <div key={index}>
               <div>
                 <div className='d-flex border-bottom align-items-center lh-base gap-4 gap-xl-5 p-3 flex-column flex-xl-row text-center text-xl-start'>
-                  <img className='rounded-2 w-24' src={item.image} alt="photo" />
+                  <img className='rounded-2 w-24' src={item.image} alt="product" />
                   <div>
                     <p className={`fw-semibold ${currentMode}-text`}>{item.name}</p>  
                     <p className={`text-muted fs-6 lh-sm fw-semibold ${currentMode}-text-50`}>{item.category}</p>  
